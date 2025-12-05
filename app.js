@@ -299,8 +299,27 @@ function criarRecon() {
       }
     }
   }
-  r.onend = () => { if (micOn) try { r.start() } catch { } }
-  r.onerror = () => { }
+  let lastRestart = 0
+  r.onend = () => {
+    if (!micOn) return
+    const now = Date.now()
+    // Evita restart muito frequente (mínimo 3 segundos entre restarts)
+    const delay = Math.max(3000 - (now - lastRestart), 500)
+    setTimeout(() => {
+      if (micOn) {
+        lastRestart = Date.now()
+        try { r.start() } catch { }
+      }
+    }, delay)
+  }
+  r.onerror = (e) => {
+    // Se for erro de permissão, desliga o microfone
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+      micOn = false
+      ui.micBtn?.classList.remove('on')
+      ui.statusBusca.textContent = 'Microfone negado ou indisponível'
+    }
+  }
   return r
 }
 function toggleMic() {
