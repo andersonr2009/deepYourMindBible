@@ -1,0 +1,81 @@
+:root { --bg:#0f1220; --panel:#171a2b; --muted:#9aa4b2; --text:#e6e8ee; --accent:#6cc3ff; --accent2:#b084f1; --danger:#ff6b6b }
+* { box-sizing:border-box }
+html,body { height:100% }
+body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif; background:linear-gradient(120deg,var(--bg),#0b0e1a 60%,#0e1322); color:var(--text) }
+.app { max-width:1200px; margin:40px auto; padding:24px; background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.06); border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,0.35) }
+.header { display:flex; align-items:center; gap:12px; margin-bottom:16px }
+.header h1 { margin:0; font-size:28px; letter-spacing:0.3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent }
+.subtitle { font-size:12px; color:var(--muted) }
+.version { padding:4px 10px; border-radius:999px; background:rgba(108,195,255,0.15); color:var(--accent) }
+.hint { margin-left:auto; display:flex; gap:8px; align-items:center }
+.controls { display:flex; flex-wrap:wrap; align-items:flex-end; gap:12px; padding:16px; background:var(--panel); border-radius:12px; border:1px solid rgba(255,255,255,0.06) }
+.field { display:flex; flex-direction:column; gap:6px; min-width:220px }
+.field.grow { flex:1; min-width:280px }
+.field.small { min-width:120px; max-width:140px }
+label { font-size:12px; color:var(--muted) }
+select,input { height:40px; padding:0 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); background:#0c0f1d; color:var(--text); outline:none }
+select:focus,input:focus { border-color:var(--accent) }
+.btn { height:40px; padding:0 14px; border:none; border-radius:10px; background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b0e17; font-weight:600; cursor:pointer }
+.btn.secondary { background:#0c0f1d; color:var(--text); border:1px solid rgba(255,255,255,0.1) }
+.btn.ghost { background:transparent; color:var(--muted); border:1px dashed rgba(255,255,255,0.15) }
+.btn:hover { filter:brightness(1.1) }
+.btn.icon { width:40px; padding:0; display:flex; align-items:center; justify-content:center }
+.btn.icon.on { background:linear-gradient(90deg,#ffb37b,#ff6b6b); color:#0b0e17 }
+.spacer { flex:1 }
+.nav { display:flex; gap:12px }
+.result { margin-top:18px; padding:20px; background:var(--panel); border-radius:12px; border:1px solid rgba(255,255,255,0.06) }
+.result .ref { color:var(--muted); margin-bottom:8px }
+.result .texto { font-size:20px; line-height:1.6 }
+.actions { margin-top:16px }
+.error { margin-top:12px; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,107,107,0.12); color:#ffd9d9 }
+.drop { margin-top:10px; padding:12px; border:1px dashed rgba(255,255,255,0.15); border-radius:10px; color:var(--muted) }
+.footer { margin-top:22px; font-size:12px; color:var(--muted) }
+.status { margin-bottom:8px; color:var(--muted) }
+.list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px }
+.list li { padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:10px; background:#0c0f1d }
+.li-ref { display:block; font-size:12px; color:var(--muted); margin-bottom:6px }
+.li-texto { font-size:16px; line-height:1.6 }
+/* Fullscreen overlay */
+.fs-overlay { position:fixed; inset:0; background:#0b0e17; color:var(--text); display:flex; align-items:center; justify-content:center; padding:4vw; z-index:9999 }
+.fs-box { width:100%; height:100%; display:flex; align-items:center; justify-content:center }
+.fs-text { max-width:100%; max-height:100%; text-align:center; line-height:1.2; word-wrap:break-word; }
+.fs-ref { position:absolute; top:1.2vw; left:2vw; color:var(--muted); font-weight:600; font-size:min(2.1vw, 22px); background:rgba(255,255,255,0.06); padding:6px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.12) }
+
+/* Forçar landscape em mobile */
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  body::before {
+    content: "📱 Por favor, gire o celular para modo paisagem (horizontal)";
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: linear-gradient(135deg, #0f1220 0%, #1a1d33 100%);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+    padding: 40px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  body::after {
+    content: "↻";
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    font-size: 80px;
+    animation: rotate 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes rotate {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}

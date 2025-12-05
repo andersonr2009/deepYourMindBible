@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="screen-orientation" content="landscape">
+  <title>Bíblia Eletrônica ARA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Bíblia Eletrônica</h1>
+      <span class="subtitle">(Deep Your Mind Bible Program)</span>
+      <span class="version">ARA</span>
+    </header>
+    <section class="controls">
+      <div class="field">
+        <label for="livro">Livro</label>
+        <select id="livro"></select>
+      </div>
+      <div class="field small">
+        <label for="capitulo">Capítulo</label>
+        <input id="capitulo" type="number" min="1" value="1">
+      </div>
+      <div class="field small">
+        <label for="verso">Verso</label>
+        <input id="verso" type="number" min="1" value="1">
+      </div>
+      <button id="buscar" class="btn">Buscar</button>
+      <div class="spacer"></div>
+      <div class="nav">
+        <button id="prev" class="btn secondary">◀ Verso anterior</button>
+        <button id="next" class="btn secondary">Próximo verso ▶</button>
+      </div>
+      <div class="field grow">
+        <label for="query">Buscar texto (aproximado)</label>
+        <div style="display:flex; gap:8px; align-items:center">
+          <input id="query" type="text" placeholder="ex.: Deus luz terra" style="flex:1">
+          <button id="buscarTexto" class="btn secondary">Pesquisar</button>
+          <label style="display:flex; align-items:center; gap:6px; color:var(--muted)"><input id="apenasLivro" type="checkbox"> Apenas livro atual</label>
+          <button id="micBtn" class="btn icon" title="Microfone">🎤</button>
+          <button id="fullscreenBtn" class="btn">FullScreen Verse</button>
+          <label style="display:flex; align-items:center; gap:6px; color:var(--muted)">
+            Ajuste fonte
+            <input id="fsScale" type="range" min="60" max="140" value="100" style="width:140px">
+            <span id="fsScaleLabel">100%</span>
+          </label>
+        </div>
+      </div>
+    </section>
+    <section id="resultado" class="result">
+      <div class="ref"></div>
+      <div class="texto"></div>
+      <div class="actions">
+        <button id="copiar" class="btn ghost">Copiar</button>
+      </div>
+    </section>
+    <section id="busca" class="result">
+      <div class="ref">Resultados da busca</div>
+      <div id="statusBusca" class="status"></div>
+      <ul id="listaResultados" class="list"></ul>
+    </section>
+    <section id="erro" class="error" hidden></section>
+    <footer class="footer">Dados: biblias/ARA.json — se não carregar, use “Abrir JSON…” ou arraste o arquivo para a página.</footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
